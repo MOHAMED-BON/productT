@@ -1,23 +1,38 @@
-var $buttons = document.querySelectorAll(".buttons");
-var $scren = document.getElementById("inp");
-var $btnd = document.getElementById("btnd");
-var $btne = document.getElementById("btne");
-var $btnc = document.getElementById("btnc");
-var num = Number($scren.value);
-$buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    
-    $scren.value += button.innerHTML;
+let Btn = document.querySelector(".btn")
+let Div = document.querySelector(".Div")
+ Btn.addEventListener("click",async()=>{
+ let rej = await fetch('https://dummyjson.com/products');
+ let data = await rej.json();
+ let products = data.products
+  console.log(products);
+  
+  let nemPro= products.filter(id=>id.id<=10)
+Div.innerHTML = ""
+nemPro.forEach( (card)=>{
 
-  });
-});
-$btnd.addEventListener("click", () => {
-  $scren.value = $scren.value.slice(0, -1);
-});
+Div.innerHTML +=`<div class="card" style="width: 18rem;">
+  <img src="${card.images[0]}" class="card-img-top" alt="...">
+  <div class="card-body">
+ 
+    <h5 class="card-title">${card.title}</h5>
+    <p class="card-text">${card.description}</p>
+     <h4 class="card-title"> EGP${card.price}</h4>
+    <a href="#" class="btn btn-primary">ADD to cart</a>
+  </div>
+</div>`
 
-$btne.addEventListener("click",()=>{
-     $scren.value = 0 ;
-})
-$btnc.addEventListener("click",()=>{
-     $scren.value = "" ;
-})
+}
+)
+
+  
+
+
+
+ 
+ 
+
+
+
+ })
+
+ 
